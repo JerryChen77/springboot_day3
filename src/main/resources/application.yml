@@ -10,9 +10,9 @@ Spring:
     url: jdbc:mysql:///testsql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
 #    Windows中Mysql的密码：
-#    password: 7901
-#    Linux中的Mysql密码：
-    password: Eminem@7901
+    password: 7901
+#    Linux中centOS的Mysql密码：
+#    password: Eminem@7901
     type: com.alibaba.druid.pool.DruidDataSource
   # 配置视图解析器的前缀和后缀
 #  mvc:
@@ -68,5 +68,5 @@ logging:
 
 #windows平台上传文件保存位置
 #realPath: D:\OneDrive - FNC\ProjectDemos\springboot_day3\target\classes\templates\files
-#Linux平台上传文件保存位置
-realPath: /usr/local/apache-tomcat-8.5.69/webapps/ROOT/WEB-INF/classes/templates/files/
+#Linux平台上传文件保存位置(ubuntu)
+realPath: /usr/local/apache-tomcat-8.5.57/webapps/ROOT/WEB-INF/classes/templates/files/
