@@ -7,9 +7,12 @@ mybatis:
 Spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///testsql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    相对位置地址：
+#    url: jdbc:mysql:///testsql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    绝对位置地址：
+    url: jdbc:mysql://192.168.140.129:3002/testsql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-#    Windows中Mysql的密码：
+#    Windows&Ubuntu中Mysql的密码：
     password: 7901
 #    Linux中centOS的Mysql密码：
 #    password: Eminem@7901
