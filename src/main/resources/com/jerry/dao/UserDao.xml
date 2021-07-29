@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jerry.dao.UserDao">
+
+<select id="findByUsername" resultType="com.jerry.entity.User" parameterType="java.lang.String">
+    SELECT card_id,username,account_password,account_balance,user_id,img,is_admin FROM tb_account WHERE username=#{username}
+</select>
+
+<select id="findByCardId" resultType="com.jerry.entity.User" parameterType="java.lang.Integer">
+    SELECT card_id,username,account_password,account_balance,user_id,img,is_admin FROM tb_account WHERE card_id=#{cardId}
+</select>
+
+<select id="findAll" resultType="com.jerry.entity.User" >
+    SELECT card_id,username,account_password,account_balance,user_id,img,is_admin FROM tb_account
+</select>
+
+<insert id="insert" parameterType="com.jerry.entity.User">
+    <selectKey order="AFTER" keyProperty="cardId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+INSERT INTO tb_account (username,account_password,account_balance,user_id,img,is_admin)VALUES (#{username},#{accountPassword},#{accountBalance},#{userId},#{img},#{isAdmin})
+</insert>
+
+<delete id="deleteByCardId" parameterType="java.lang.Integer">
+DELETE FROM tb_account WHERE card_id=#{cardId}
+</delete>
+
+<update id="updateBalance">
+    UPDATE tb_account SET account_balance=#{balance} WHERE card_id=#{cardId}
+</update>
+<update id="updatePersonalInfo" parameterType="com.jerry.entity.User">
+    UPDATE tb_account set username=#{username},account_password=#{accountPassword},img=#{img},is_admin=#{isAdmin} where card_id=#{cardId}
+</update>
+    <update id="updateAllInfos" parameterType="com.jerry.entity.User">
+    UPDATE tb_account set username=#{username},account_password=#{accountPassword},account_balance=#{accountBalance},user_id=#{userId},img=#{img},is_admin=#{isAdmin} where card_id=#{cardId}
+</update>
+</mapper>

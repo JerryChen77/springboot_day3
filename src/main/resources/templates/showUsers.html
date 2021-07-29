@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Hello Hero</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <p>
+    <a type="button" class="btn btn-success" style="float: left" href="/user/logout">注销</a>
+    <h1 style="text-align: center">英雄联盟</h1>
+    <a type="button" class="btn btn-success" style="float: right" href="/newUser.html">添加</a>
+    </p>
+
+    <table class="table table-hover">
+        <tr>
+            <td>卡号</td>
+            <td>用户名</td>
+            <td>账号密码</td>
+            <td>账户余额</td>
+            <td>用户ID</td>
+            <td>头像</td>
+            <td>是否管理员（1：是）</td>
+            <td>操作</td>
+        </tr>
+
+        <tr th:each="user:${users}">
+            <td th:text="${user.cardId}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.accountPassword}"></td>
+            <td th:text="${user.accountBalance}"></td>
+            <td th:text="${user.userId}"></td>
+            <td><IMG th:src="@{/files/{filename}(filename=${user.img})}" width="45px" style="border-radius: 30px"></td>
+            <td th:text="${user.isAdmin}"></td>
+
+            <td>
+                <form th:action="|user/${user.cardId}|" method="post">
+                    <a type="button" class="btn btn-primary" th:href="|user/${user.cardId}|">修改</a>
+                    <input class="btn btn-danger" type="submit" value="删除">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+            <div class="modal-footer no-margin-top">
+
+            <div class="col-md-6 col-xs-8 col-xs-offset-1">
+                当前第 [[${pageInfo.pageNum}]]页，共 [[${pageInfo.pages}]] 页， 共 [[${pageInfo.total}]] 条记录
+            </div>
+
+            <ul class="pagination pull-right no-margin">
+                <li>
+                    <a th:href="'/user/users?pageNo=1'">首页</a>
+                </li>
+                <li  th:if="${pageInfo.hasPreviousPage}">
+                    <a th:href="'/user/users?pageNo='+${pageInfo.prePage}">上一页</a>
+                </li>
+            <li th:each="nav:${pageInfo.navigatepageNums}">
+                <a th:href="'/user/users?pageNo='+${nav}" th:text="${nav}" th:if="${nav != pageInfo.pageNum}">1</a>
+                <span style="font-weight: bold;background: #6faed9;" th:if="${nav == pageInfo.pageNum}" th:text="${nav}" ></span>
+            </li>
+                <li th:if="${pageInfo.hasNextPage}">
+                    <a th:href="'/user/users?pageNo='+${pageInfo.nextPage}">下一页</a>
+                </li>
+                <li>
+                    <a th:href="'/user/users?pageNo='+${pageInfo.pages}">尾页</a>
+                </li>
+            </ul>
+</div>
+
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

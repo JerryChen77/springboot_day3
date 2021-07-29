@@ -1,0 +1,72 @@
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:com/jerry/dao/UserDao.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#spring-jdbc配置
+Spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///testsql?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+#    Windows中Mysql的密码：
+#    password: 7901
+#    Linux中的Mysql密码：
+    password: Eminem@7901
+    type: com.alibaba.druid.pool.DruidDataSource
+  # 配置视图解析器的前缀和后缀
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+#    hiddenmethod:
+#      filter:
+#        enabled: true
+  #thymeleaf配置
+  thymeleaf:
+    #在开发阶段，建议关闭thymeleaf的缓存
+    cache: false
+    mode: HTML
+  #SpringBoot需要通过控制器跳转才能访问到templates下的html文件
+  #因为springboot默认访问static,resources,public这些文件夹下的文件，而没有默认访问templates下的
+  #我们需要在配置加上:
+  web:
+    resources:
+      static-locations:
+        - classpath:/META-INF/resources/
+        - classpath:/resources/
+        - classpath:/static/,classpath:/public/
+        - classpath:/templates/
+        - file:D:\OneDrive - FNC\ProjectDemos\springboot_day3\target\classes\templates\files
+#在application.properties中需要设置：spring.mvc.hiddenmethod.filter.enabled=true
+#可以把 POST 请求转为 DELETE 或 POST 请求
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+# SpringSecurity的配置文件
+#  security:
+#    user:
+#      name: qq
+#      password: 123
+
+
+
+
+# 日志配置:
+logging:
+  level:
+    com.springday2: debug
+
+#servlet:
+#  multipart:
+#    enabled: true
+#    #location: roy-upload-tmp
+#    max-file-size: 100MB
+#    max-request-size: 100MB
+
+
+#windows平台上传文件保存位置
+#realPath: D:\OneDrive - FNC\ProjectDemos\springboot_day3\target\classes\templates\files
+#Linux平台上传文件保存位置
+realPath: /usr/local/apache-tomcat-8.5.69/webapps/ROOT/WEB-INF/classes/templates/files/
